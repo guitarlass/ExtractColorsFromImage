@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Find Colors in Your Image</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{ bootstrap.load_css() }}
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="mb-4">Find Colors in Your Image</h1>
+        {% with msgs = get_flashed_messages() %}
+            {% if msgs %}
+                <ul>
+                {% for msg in msgs %}
+                    <li>{{ msg }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <p class="mb-4">Upload your image to find out!</p>
+        <form method="post" id="find_colors" action="/" enctype="multipart/form-data" >
+            <input type="file" name="image" />
+            <input type="submit" value="Find Colors">
+        </form>
+        <div class="d-flex justify-content-between align-items-center">
+        {% for color in colors %}
+            <div class="d-flex flex-column col-md-1 gap-2">
+                <div class="color-box" style="background-color: {{ color }}; border: solid #DDD 1px;"></div>
+                <p>{{ color }}</p>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+
+</body>
+</html>
