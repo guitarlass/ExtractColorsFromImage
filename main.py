@@ -26,8 +26,12 @@ def home():
                 # image = ec.load_image(path)
                 # colors = ec.extract_colors(image, 15)
                 # ec.plot_colors(colors)
+            if os.path.exists(path):
+                os.remove(path)
     return render_template('index.html', colors=colors)
 
 
 if __name__ == '__main__':
+    if not os.path.exists(UPLOAD_FOLDER):
+        os.makedirs(UPLOAD_FOLDER)
     app.run(debug=True)
